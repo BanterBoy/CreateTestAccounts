@@ -1,4 +1,4 @@
-function New-FakeADUserDetails {
+function New-RandomUser {
     <#
         .SYNOPSIS
         Function to 
@@ -7,7 +7,7 @@ function New-FakeADUserDetails {
         Function to
 
         .EXAMPLE
-        New-FakeUserDetails
+        New-RandomUser
 
         .INPUTS
         
@@ -57,14 +57,7 @@ function New-FakeADUserDetails {
             ValueFromPipeline = $True,
             ValueFromPipelineByPropertyName = $True,
             HelpMessage = "Please enter the domain name for your Email address.")]
-        [string]$Email = "$env:USERDNSDOMAIN",
-
-        [Parameter(Mandatory = $false,
-            ParameterSetName = "Default",
-            ValueFromPipeline = $True,
-            ValueFromPipelineByPropertyName = $True,
-            HelpMessage = "Please enter the domain name for your Email address.")]
-        [string]$Path
+        [string]$Email = "$env:USERDNSDOMAIN"
     )
 
     BEGIN {
@@ -79,7 +72,7 @@ function New-FakeADUserDetails {
         
         try {
             foreach ( $item in $Results.results ) {
-                $NewFakeUser = [ordered]@{
+                $RandomUser = [ordered]@{
                     "Name"              = $item.name.first + " " + $item.name.last
                     "Title"             = $item.name.title
                     "GivenName"         = $item.name.first
@@ -89,15 +82,34 @@ function New-FakeADUserDetails {
                     "StreetAddress"     = $item.location.street.name
                     "City"              = $item.location.city
                     "State"             = $item.location.state
-                    "Country"           = $item.nat
+                    "Country"           = $item.location.country
                     "PostalCode"        = $item.location.postcode
                     "UserPrincipalName" = $item.name.first + "." + $item.name.last + "@" + $mail
+                    "PersonalEmail"     = $item.email
                     "SamAccountName"    = $item.name.first + $item.name.last
+                    "HomePhone"         = $item.phone
+                    "MobilePhone"       = $item.cell
+                    "Gender"            = $item.gender
+                    "Nationality"       = $item.nat
+                    "Age"               = $item.dob.age
+                    "DateOfBirth"       = $item.dob.date
+                    "NINumber"          = $item.id.value
+                    "TimeZone"          = $item.location.timezone.description
+                    "TimeOffset"        = $item.location.timezone.offset
+                    "Latitude"          = $item.location.coordinates.latitude
+                    "Longitude"         = $item.location.coordinates.longitude
+                    "Username"          = $item.login.username
+                    "UUID"              = $item.login.uuid
                     "AccountPassword"   = $item.login.password
-                    "Path"              = $Path
-                    # "ThumbnailPicture"  = $item.picture.thumbnail
+                    "Salt"              = $item.login.salt
+                    "MD5"               = $item.login.md5
+                    "Sha1"              = $item.login.sha1
+                    "Sha256"            = $item.login.sha256
+                    "LargePicture"      = $item.picture.large
+                    "MediumPicture"     = $item.picture.medium
+                    "ThumbnailPicture"  = $item.picture.thumbnail
                 }
-                $obj = New-Object -TypeName PSObject -Property $NewFakeUser
+                $obj = New-Object -TypeName PSObject -Property $RandomUser
                 Write-Output $obj
             }
         }
