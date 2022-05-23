@@ -7,21 +7,4 @@ $OnPremUser | New-FakeADUser
 $OnPremUser | Format-Table -Property * -AutoSize -Wrap
 
 
-Source RemoteAccess ID 20250, 20275
-
-RemoteAccess 20249, 20250, 20271, 20272, 20274, 20275
-
-Microsoft-Windows-RasRoutingProtocols/Config,System
-
-
-Get-WinEvent -LogName System -ComputerName REMOTE01 | Where-Object { ( $_.Id -like '20249' ) -or ( $_.Id -like '20250' ) -or ( $_.Id -like '20271' ) -or ( $_.Id -like '20272' ) -or ( $_.Id -like '20274' ) -or ( $_.Id -like '20275' ) }
-
-
-$StartTime = (Get-Date).AddDays(-30)
-$EndTime = Get-Date
-$Events = Get-WinEvent -ComputerName REMOTE01 -FilterHashTable @{LogName='System';ID='20249','20250','20271','20272','20274','20275';StartTime=$StartTime;EndTime=$EndTime}
-
-$Events |
-Where-Object {  ( $_.Message -like '*VENTRICA\*' ) -and ( $_.Message -like '*connected*' ) -or ( $_.Message -like '*disconnected*' ) } |
-Select-Object -Property Message |
-Format-Table -Wrap
+Get-ADUser -Filter { Name -like '*Luke*' } -Properties * | Select-Object -Property SamAccountName, GivenName, Surname, Initials, DisplayName, EmployeeID, EmployeeNumber, Description, Title, Company, Organization, Department, Division, Office, StreetAddress, City, State, Country, PostalCode, POBox, Manager, HomePhone, OfficePhone, MobilePhone, Fax, EmailAddress, UserPrincipalName, HomePage, ProfilePath, HomeDirectory, HomeDrive, ScriptPath, AccountExpirationDate, CannotChangePassword, ChangePasswordAtLogon, PasswordNotRequired, PasswordNeverExpires, Enabled
