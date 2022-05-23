@@ -157,12 +157,12 @@ function New-FakeADUser {
         [Parameter(
             Mandatory = $false,
             ParameterSetName = "Default",
-            ValueFromPipeline = $true,
-            ValueFromPipelineByPropertyName = $true,
-            HelpMessage = "Please enter your"
+            ValueFromPipeline = $True,
+            ValueFromPipelineByPropertyName = $True,
+            HelpMessage = "Please enter the DistinguishedName for the OU path for your Email address."
         )]
         [string]
-        $Path,
+        $Path = (Get-ADDomain).UsersContainer,
 
         # Parameter help description
         [Parameter(
@@ -182,28 +182,49 @@ function New-FakeADUser {
     }
     
     process {
-
-        $userUserSettings = @{
-            Name                  = $_.Name
-            Title                 = $_.Title
-            GivenName             = $_.GivenName
-            Surname               = $_.Surname
-            DisplayName           = $_.DisplayName
-            SamAccountName        = $_.SamAccountName
-            UserPrincipalName     = $_.UserPrincipalName
-            StreetAddress         = $_.StreetAddress
-            State                 = $_.State
-            City                  = $_.City
-            Country               = $_.Country
-            PostalCode            = $_.PostalCode
-            AccountPassword       = (ConvertTo-SecureString -String $AccountPassword -AsPlainText -Force)
-            Enabled               = $true
-            ChangePasswordAtLogon = $true
-            Path                  = $_.Path
+        if ($path) {
+            $userUserSettings = @{
+                Name                  = $_.Name
+                Title                 = $_.Title
+                GivenName             = $_.GivenName
+                Surname               = $_.Surname
+                DisplayName           = $_.DisplayName
+                SamAccountName        = $_.SamAccountName
+                UserPrincipalName     = $_.UserPrincipalName
+                StreetAddress         = $_.StreetAddress
+                State                 = $_.State
+                City                  = $_.City
+                Country               = $_.Country
+                PostalCode            = $_.PostalCode
+                AccountPassword       = (ConvertTo-SecureString -String $AccountPassword -AsPlainText -Force)
+                Enabled               = $true
+                ChangePasswordAtLogon = $true
+                Path                  = $Path
+            }
+            
+            New-ADUser @userUserSettings -Verbose
         }
-        
-        New-ADUser @userUserSettings -verbose
-        
+        else {
+            $userUserSettings = @{
+                Name                  = $_.Name
+                Title                 = $_.Title
+                GivenName             = $_.GivenName
+                Surname               = $_.Surname
+                DisplayName           = $_.DisplayName
+                SamAccountName        = $_.SamAccountName
+                UserPrincipalName     = $_.UserPrincipalName
+                StreetAddress         = $_.StreetAddress
+                State                 = $_.State
+                City                  = $_.City
+                Country               = $_.Country
+                PostalCode            = $_.PostalCode
+                AccountPassword       = (ConvertTo-SecureString -String $AccountPassword -AsPlainText -Force)
+                Enabled               = $true
+                ChangePasswordAtLogon = $true
+            }
+            
+            New-ADUser @userUserSettings -Verbose
+        }
     }
         
     end {
