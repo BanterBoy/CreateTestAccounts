@@ -2,19 +2,21 @@ function New-TempADUserDetails {
     
     <#
         .SYNOPSIS
-        The function New-TempADUserDetails creates a random user using the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me
+        The function New-TempADUserDetails creates a random user using the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me.
 
         .DESCRIPTION
         The function New-TempADUserDetails creates a random user using the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me a free and easy to use service to generate random user data for application testing.
 
-        You can request a different nationality of a randomuser. Pictures won't be affected by this, but data such as location, home phone, id, etc. will be more appropriate.
+        You can request a different nationality of a random user. Data such as location, home phone, id, etc. will be more appropriate.
+
+        This Function was created to produce random user details tailored for Active Directory Users. This function can be piped into New-TempADUser to create a random user into Active Directory.
 
         .EXAMPLE
         New-RandomUser
         Creates a single random user
 
         .EXAMPLE
-        New-TempADUserDetails -Path (Get-ADDomain).UsersContainer 
+        New-TempADUserDetails -Path (Get-ADDomain).UsersContainer
 
         .EXAMPLE
         New-RandomUser -Nationality GB -PassLength 14 -Quantity 10 -Email "leigh-services.com"
