@@ -2,16 +2,17 @@ function New-TempADUser {
 
     <#
         .SYNOPSIS
-        Function to 
+        This function creates a new temporary AD user using the data parsed from New-TempADUserDetails.
 
         .DESCRIPTION
         Function to
         https://randomuser.me/
 
         .EXAMPLE
-        New-TempADUserDetails
+        New-TempADUserDetails | New-TempADUser
 
         .INPUTS
+            [PSObject]
         
         .OUTPUTS
                 
