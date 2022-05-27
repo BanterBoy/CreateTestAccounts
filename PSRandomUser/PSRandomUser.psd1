@@ -12,7 +12,7 @@
     RootModule        = 'PSRandomUser.psm1'
     
     # Version number of this module.
-    ModuleVersion     = '0.0.1'
+    ModuleVersion     = '1.0.0'
     
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -30,8 +30,8 @@
     Copyright         = '(c) Luke Leigh. All rights reserved.'
     
     # Description of the functionality provided by this module
-    Description       = 'The PSRandomUser Module enables you to create random user accounts.'
-    
+    Description       = 'The PSRandomUser Module enables you to create random user accounts. This module can be used to create random user accounts for testing purposes. Commands included enable the easy creation of Temporary Active Directory user accounts. This module is not intended for use in production environments.'
+
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''
     
@@ -95,16 +95,16 @@
         PSData = @{
     
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags       = 'RandomUsers','PowerShell','TestAccount'
+            Tags       = 'RandomUsers','PowerShell','TestAccount','Test','ActiveDirectory','Accounts','User'
     
             # A URL to the license for this module.
-            LicenseUri = 'https://github.com/BanterBoy/CreateTestAccounts/blob/production/LICENSE'
+            LicenseUri = 'https://raw.githubusercontent.com/BanterBoy/CreateTestAccounts/main/LICENSE'
     
             # A URL to the main website for this project.
             ProjectUri = 'https://github.com/BanterBoy/CreateTestAccounts'
     
             # A URL to an icon representing this module.
-            # IconUri = ''
+            IconUri = 'https://raw.githubusercontent.com/BanterBoy/CreateTestAccounts/main/Assets/PSRandomUser.webp'
     
             # ReleaseNotes of this module
             # ReleaseNotes = ''
@@ -129,4 +129,3 @@
     # DefaultCommandPrefix = ''
     
 }
-    
