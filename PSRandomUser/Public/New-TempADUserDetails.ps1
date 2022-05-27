@@ -2,43 +2,45 @@ function New-TempADUserDetails {
     
     <#
         .SYNOPSIS
-        The function New-TempADUserDetails creates a random user using the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me.
+            The function New-TempADUserDetails creates user account details for use in creating Temporary Active Directory users, by accessing the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me.
 
         .DESCRIPTION
-        The function New-TempADUserDetails creates a random user using the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me a free and easy to use service to generate random user data for application testing.
+            The function New-TempADUserDetails creates user account details for use in creating Temporary Active Directory users. It does this by accessing the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me a free and easy to use service to generate random user data for application testing.
 
-        You can request a different nationality of a random user. Data such as location, home phone, id, etc. will be more appropriate.
+            You can specify the nationality of a user and data such as location, home phone, id, etc. will be more appropriate.
 
-        This Function was created to produce random user details tailored for Active Directory Users. This function can be piped into New-TempADUser to create a random user into Active Directory.
-
-        .EXAMPLE
-        New-RandomUser
-        Creates a single random user
+            This Function was created to produce random user details tailored for Active Directory Users. This function can be piped into New-TempADUser to create a random user into Active Directory.
 
         .EXAMPLE
-        New-TempADUserDetails -Path (Get-ADDomain).UsersContainer
+            New-TempADUserDetails
+            Creates a single set of random user details for use in creating a Temporary Active Directory user.
 
         .EXAMPLE
-        New-RandomUser -Nationality GB -PassLength 14 -Quantity 10 -Email "leigh-services.com"
-        Creates 10 random users from United Kingdom, with a password length of 14 characters and with an email address @leigh-services.com
+            New-TempADUserDetails -Path (Get-ADDomain).UsersContainer
+            Creates a single set of random user details for use in creating a Temporary Active Directory user and adds it to the specified Users Container in Active Directory.
+
+        .EXAMPLE
+            New-TempADUserDetails -Nationality GB -PassLength 14 -Quantity 10 -Email "leigh-services.com"
+            Creates 10 Active Directory users from United Kingdom, with a password length of 14 characters and with an email address @leigh-services.com. The users will be added to the Users Container of the current Active Directory Domain.
 
         .INPUTS
-        [string] Nationality
-        [int] PassLength
-        [int] Quantity
-        [string] Email
+            [string] Nationality
+            [int] PassLength
+            [int] Quantity
+            [string] Email
         
         .OUTPUTS
-                
+            [PSObject]
+        
         .NOTES
-        Author:     Luke Leigh
-        Website:    https://blog.lukeleigh.com/
-        LinkedIn:   https://www.linkedin.com/in/lukeleigh/
-        GitHub:     https://github.com/BanterBoy/
-        GitHubGist: https://gist.github.com/BanterBoy
+            Author:     Luke Leigh
+            Website:    https://blog.lukeleigh.com/
+            LinkedIn:   https://www.linkedin.com/in/lukeleigh/
+            GitHub:     https://github.com/BanterBoy/
+            GitHubGist: https://gist.github.com/BanterBoy
 
         .LINK
-        https://github.com/BanterBoy
+            https://github.com/BanterBoy
     #>
 
     [CmdletBinding(
@@ -141,7 +143,7 @@ function New-TempADUserDetails {
                         "State"             = $item.location.state
                         "Country"           = $item.nat
                         "PostalCode"        = $item.location.postcode
-                        "UserPrincipalName" = $item.name.first + "." + $item.name.last + "@" + $mail
+                        "UserPrincipalName" = ($item.name.first + "." + $item.name.last).ToLower() + "@" + $mail
                         "SamAccountName"    = $item.name.first + $item.name.last
                         "AccountPassword"   = $item.login.password
                     }
