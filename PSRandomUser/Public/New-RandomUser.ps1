@@ -1,38 +1,39 @@
 function New-RandomUser {
     <#
         .SYNOPSIS
-        The function New-RandomUser creates a random user using the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me
+            The function New-RandomUser creates a random user using the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me
 
         .DESCRIPTION
-        The function New-RandomUser creates a random user using the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me a free and easy to use service to generate random user data for application testing.
+            The function New-RandomUser creates a random user using the API provided by the creators of RANDOM USER GENERATOR - https://randomuser.me a free and easy to use service to generate random user data for application testing.
 
-        You can request a different nationality of a randomuser. Pictures won't be affected by this, but data such as location, home phone, id, etc. will be more appropriate.
-
-        .EXAMPLE
-        New-RandomUser
-        Creates a single random user
+            You can request a different nationality of a randomuser. Pictures won't be affected by this, but data such as location, home phone, id, etc. will be more appropriate.
 
         .EXAMPLE
-        New-RandomUser -Nationality GB -PassLength 14 -Quantity 10 -Email "leigh-services.com"
-        Creates 10 random users from United Kingdom, with a password length of 14 characters and with an email address @leigh-services.com
+            New-RandomUser
+            Creates a single random user
+
+        .EXAMPLE
+            New-RandomUser -Nationality GB -PassLength 14 -Quantity 10 -Email "leigh-services.com"
+            Creates 10 random users from United Kingdom, with a password length of 14 characters and with an email address @leigh-services.com
 
         .INPUTS
-        [string] Nationality
-        [int] PassLength
-        [int] Quantity
-        [string] Email
+            [string] Nationality
+            [int] PassLength
+            [int] Quantity
+            [string] Email
         
         .OUTPUTS
+            [PSObject]
                 
         .NOTES
-        Author:     Luke Leigh
-        Website:    https://blog.lukeleigh.com/
-        LinkedIn:   https://www.linkedin.com/in/lukeleigh/
-        GitHub:     https://github.com/BanterBoy/
-        GitHubGist: https://gist.github.com/BanterBoy
+            Author:     Luke Leigh
+            Website:    https://blog.lukeleigh.com/
+            LinkedIn:   https://www.linkedin.com/in/lukeleigh/
+            GitHub:     https://github.com/BanterBoy/
+            GitHubGist: https://gist.github.com/BanterBoy
 
         .LINK
-        https://github.com/BanterBoy
+            https://github.com/BanterBoy
     #>
 
     [CmdletBinding(
